@@ -289,3 +289,58 @@ With the two above modification for the A* algorithm, the path for the second ca
   <figcaption> Result for combinatory planning</figcaption>
 </div> 
 
+### Testing for simulation in gazebo
+
+1. **Simulation set up**
+
+- Please refer to https://github.com/idra-lab/loco_nav for the simulation set up. 
+
+2. **How to run the project**
+- Create a ros package inside the ros_ws/src directory with dependencies : rospy, std_msgs, geometry_msgs, nav_msgs, obstacles_msgs
+- Copy all the files on github into the src directory of the new package
+- Inside the src folder of the package, give the two files execute permission
+```
+chmod +x ros_com_ubuntu.py
+chmod +x ros_sample_ubuntu.py
+```
+- Install the pyvoronoi library
+```
+pip install pyvoronoi
+``` 
+- Inside the ros_ws directory, run:
+```
+catkin_make
+source devel/setup.bash
+```
+
+- For combinatorial planning ,run:
+```
+rosrun <package_name> ros_com_ubuntu.py
+``` 
+- For sampling-based planning, run:
+```
+rosrun <package_name> ros_sample_ubuntu.py
+``` 
+
+3. **Result**
+
+<div style="text-align: center;">  
+  <img src="Figure_1.png" alt="Alt Text" width = 50%>  
+  <figcaption> Simulation result for combinatory planning</figcaption>
+</div> 
+
+For the combinatory planning, the path generated may be convoluted. This is due to the interpolation process where the car has to go through every node in the voronoi roadmap. Two node in the roadmap who are too close to eah other may cause the car to have to cirle around depending on the resolution of interpolation. The runtime of the combinatorial planning can varies a lot since it depends on the costly A* algorithm mentioned above.
+
+<div style="text-align: center;">  
+  <img src="sample_demonstration2.png" alt="Alt Text" width = 50%>  
+  <figcaption> Simulation result for Sample-based planning</figcaption>
+</div> 
+
+For the sample-based planning, the path is generally more "straight forward" but the runtime of the sample-based planning may vary drastically depending on the size of the map. The larger the map, the more samples there are and generally the path is longer which make the collision checking algorithm take longer to execute.
+
+The implemetation of the above algorithm is done in python. Whether or not the two limos collide with each other also depends on the path tracking control system, which we only applied the provided one in this project, so we cannot know or control how close the two limo follow their given paths. Therefore, each algorithm (combinatory and sample-based), should be run several times to test.  
+
+### Conclusion
+
+While the two approaches are not without some drawbacks, nevertheless, they have provide more options, whose performance may vary depend on the given map and minimum turning radius, for the problem of finding path for two dubins vehicle. 
+
