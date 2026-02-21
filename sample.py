@@ -494,9 +494,11 @@ class Map():
                                 limo0_path_list.append(limo0_path)
                                 limo1_path_list.append(limo1_path)
                                 cost_list.append(max(limo0_path_length,limo1_path_length))
-        min_index = cost_list.index(min(cost_list))
-        return limo0_path_list[min_index],limo1_path_list[min_index], cost_list[min_index]
-
+        if cost_list:
+            min_index = cost_list.index(min(cost_list))
+            return limo0_path_list[min_index],limo1_path_list[min_index], cost_list[min_index]
+        else:
+            return None,None,10000
 
 if __name__ == '__main__':
     
@@ -537,4 +539,5 @@ if __name__ == '__main__':
     map.plot_map()
     map.plot_path(sample1)
     map.plot_path(sample2)
+
     plt.show()
