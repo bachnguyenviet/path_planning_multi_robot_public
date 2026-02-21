@@ -79,7 +79,7 @@ The path is first sample into small interval of the same length. Then the algori
 Not only collision checking with the obstacle, but collision checking between two cars also apply this method. Since every interval is equal, the collision checking function will check for the pose of two car at the same time stamp.
 
 <div style="text-align: center;">  
-  <img src=".Report/Screenshot(1436).png" alt="Alt Text" width = 30%>  
+  <img src="./Report/Screenshot(1436).png" alt="Alt Text" width = 30%>  
   <figcaption>Broad phase collision boundary for car</figcaption>
 </div> 
 
@@ -364,4 +364,5 @@ The implemetation of the above algorithm is done in python. Whether or not the t
 ### Conclusion
 
 While the two approaches are not without some drawbacks, nevertheless, they have provide more options, whose performance may vary depend on the given map and minimum turning radius, for the problem of finding path for two dubins vehicle. 
+
 
