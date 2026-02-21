@@ -135,11 +135,13 @@ class Sample_based:
                 self.limo0_path,self.limo1_path,cost = map.find_path()
                 if not self.limo0_path:
                     print("No path found, gate may be unreachable or try sampling more")
-                self.limo0_sample_path = sample_path(self.limo0_path,self.limo0, map.limo_turning_rad/10,map.limo_turning_rad)
-                self.limo1_sample_path = sample_path(self.limo1_path,self.limo1, map.limo_turning_rad/10,map.limo_turning_rad)
-                self.path_found = True
-                print('Find path done')
-                self.timer1.shutdown()
+                    self.timer1.shutdown()
+                else:
+                    self.limo0_sample_path = sample_path(self.limo0_path,self.limo0, map.limo_turning_rad/10,map.limo_turning_rad)
+                    self.limo1_sample_path = sample_path(self.limo1_path,self.limo1, map.limo_turning_rad/10,map.limo_turning_rad)
+                    self.path_found = True
+                    print('Find path done')
+                    self.timer1.shutdown()
     
     def follow_path(self, event):
         if self.path_found:
